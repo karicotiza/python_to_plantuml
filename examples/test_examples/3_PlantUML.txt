@@ -1,0 +1,40 @@
+@startuml
+
+abstract class Mediator {
+{method} +notify(object,  str): None
+}
+
+class ConcreteMediator implements Mediator
+class ConcreteMediator {
+{method} -__init__(Component1,  Component2): None
+{field} #component1: component1
+{field} #component1.mediator: self
+{field} #component2: component2
+{field} #component2.mediator: self
+{method} +notify(object,  str): None
+}
+
+class BaseComponent {
+{method} -__init__(mediator): None
+{field} #mediator: mediator
+{method} +mediator(): Mediator
+{method} +mediator(Mediator): None
+}
+
+class Component1 implements BaseComponent
+class Component1 {
+{method} +do_a(): None
+{method} +do_b(): None
+}
+
+class Component2 implements BaseComponent
+class Component2 {
+{method} +do_c(): None
+{method} +do_d(): None
+}
+
+Component1 <-- ConcreteMediator
+Mediator <-- BaseComponent
+Component2 <-- ConcreteMediator
+
+@enduml

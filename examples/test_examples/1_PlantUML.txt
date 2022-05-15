@@ -1,0 +1,20 @@
+@startuml
+
+class Flyweight {
+{method} -__init__(str): None
+{field} #shared_state1: shared_state
+{field} #shared_state2: shared_state
+{method} +operation(str): None
+}
+
+class FlyweightFactory {
+{field} #flyweights: Dict[str,Flyweight]
+{method} -__init__(Dict): None
+{method} +get_key(Dict): str
+{method} +get_flyweight(Dict): Flyweight
+{method} +list_flyweights(): None
+}
+
+Flyweight <-- FlyweightFactory
+
+@enduml

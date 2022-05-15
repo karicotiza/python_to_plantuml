@@ -1,0 +1,40 @@
+@startuml
+
+abstract class Builder {
+{method} +product(): None
+{method} +produce_part_a(): None
+{method} +produce_part_b(): None
+{method} +produce_part_c(): None
+}
+
+class ConcreteBuilder1 implements Builder
+class ConcreteBuilder1 {
+{method} -__init__(): None
+{method} +reset(): None
+{field} #product: Product1()
+{method} +product(): Product1
+{method} +produce_part_a(): None
+{method} +produce_part_b(): None
+{method} +produce_part_c(): None
+}
+
+class Product1 {
+{method} -__init__(): None
+{field} +parts: List
+{method} +add(Any): None
+{method} +list_parts(): None
+}
+
+class Director {
+{method} -__init__(): None
+{field} #builder: None
+{method} +builder(): Builder
+{method} +builder(Builder): None
+{method} +build_minimal_viable_product(): None
+{method} +build_full_featured_product(): None
+}
+
+Product1 <-- ConcreteBuilder1
+Builder <-- Director
+
+@enduml

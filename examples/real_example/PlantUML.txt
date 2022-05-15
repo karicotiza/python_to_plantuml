@@ -1,0 +1,34 @@
+@startuml
+
+class Listener {
+{method} -__init__(recognizer.Recognizer): None
+{field} +recognizer: speech_recognition.Recognizer()
+{field} +recognizer.pause_threshold: 2
+{field} +recognizer.non_speaking_duration: 1
+{field} +microphone: speech_recognition.Microphone()
+{field} +speech_to_text_module: speech_to_text_module
+{method} -anything_to_wav(str): self.listen_file(".temp.wav")
+{method} +listen_file(str): self.__recognize(audio)
+{method} +listen_microphone(): output
+{method} -recognize(numpy.ndarray): self.speech_to_text_module.recognize(file)
+}
+
+class ModelInjector {
+{method} -__init__(str): None
+{field} +models: os.listdir(path_to_directory_with_models)
+{method} +get_models(): self.models
+}
+
+class Recognizer {
+{method} -__init__(list): None
+{field} +processors: List
+{field} +models: List
+{field} +size: len(self.processors)
+{field} +languages: List
+{method} +recognize(numpy.ndarray): self.__chose_language(output)
+{method} -chose_language(dict): [language,dictionary_with_transcriptions[language]]
+}
+
+Recognizer <-- Listener
+
+@enduml
